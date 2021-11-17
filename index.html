@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 7</title>
+</head>
+<body>
+    <ul id="list"></ul>></ul>
+    <img src="https://c.tenor.com/n4tkp-dw89IAAAAC/walk-polar-bear.gif" alt="" id="image">
+    <script>
+        const url = "https://jsonplaceholder.typicode.com/photos";
+        const list = document.getElementById("list")
+        const image = document.getElementById("image")
+
+        const getPhotos = async () => {
+            const result = await fetch(url);
+            const photos = await result.json();
+            photos.map(element => {
+                let li = document.createElement('li')
+                li.innerHTML = `<a href = "detalle.html?id=${element.id}">${element.title}</a>`
+                list.appendChild(li);
+            })
+
+            return photos;
+        }
+
+        getPhotos().then(photos => {
+            console.log(photos)
+        }).catch(error => console.log(error)).finally(() => {
+            image.src = "";
+        })
+        
+    </script>
+</body>
+</html>
